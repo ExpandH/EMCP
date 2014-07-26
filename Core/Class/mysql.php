@@ -15,6 +15,7 @@
 		$result; // Holds the query result.
 		$records; // Holds the total number of records returned.
 		$affected; // Hols the total number of records affected.
+		$arrayedResult;
 
 		$hostname; // Holds the hostname.
 		$username; // Holds the username.
@@ -91,6 +92,101 @@
 
 
 		/**
+		 * Runs a mysql_real_escape_string
+		 * 
+		 * @param string data The data to escape.
+		 * @param string type The type of the data (str, int...).
+		 * 
+		 * @return array/string The data after escaping it.
+		 */
+
+		private function escapeData($data, $type)
+		{
+			$newData = array();
+			if(is_array($data))
+			{
+
+				foreach($data as $key => $value)
+				{
+					if (!is_array($value))
+					{
+						$value = setData($value, $type[$i]);
+						$newData[$key] = mysql_real_escape_string($value, $this->db_link);
+					}
+				}
+				return $newData;
+			}
+			else
+			{
+				$data = $this->setData($data, $type);
+				$data = mysql_real_escape_string($data, $this->db_link);
+				return $data;
+			}
+		}
+
+
+		/**
+		 * Sets the data to a type, to make sure that the data is the specific type.
+		 * 
+		 * @param string data The data to do stuff with.
+		 * @param string type The type to set the data to.
+		 * 
+		 * @return string the fixed data.
+		 */
+
+		private function setData($data, $type)
+		{
+			switch ($data) {
+				case 'none':
+					$data = $data;
+					break;
+
+				case 'str':
+					$data = settype($data, 'string');
+					break;
+					
+				case 'int':
+					$data = settype($data, 'integer');
+					break;
+					
+				case 'float':
+					$data = settype($data, 'float');
+					break;
+					
+				case 'bool':
+					$data = settype($data, 'boolean');
+					break;
+					
+				case 'datatime':
+					$data = trim($data);
+					$data = preg_replace('/[\d\-: ]/i', '', $data);
+					preg_match('/^([\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2})$/', $data, $matches);
+					$data = $matches[1];
+					break;
+					
+				case 'ts2dt':
+					$data = settype($data, 'integer');
+					$data = date('Y-m-d H:i:s', $data);
+					break;
+					
+				case 'hexcolor':
+					preg_match('/(#[0-9abcdef]{6})/i', $data, $matches);
+					$data = $matches[1];
+					break;
+					
+				case 'email':
+					$data = filter_var($data, FILTER_VALIDATE_EMAIL);
+					break;
+				
+				default:
+					$data = ''
+					break;
+			}
+			return $data;
+		}
+
+
+		/**
 		 * Disconnect from a db.
 		 * 
 		 * @param string $db Which database to disconnect from.
@@ -130,13 +226,44 @@
 					$this->affected = 0;
 				}
 
-				if ()
+				if ($this->records > 0)
+				{
+					$this->arrayResults();
+					return $this->arrayedResult;
+				}
+				else
+				{
+					return true;
+				}
 			}
 			else
 			{
 				throw new Exception("Query failed: " . mysql_error($this->db_link));
 				return false;
 			}
+		}
+
+
+		/**
+		 * Puts the Results into an Array.
+		 * 
+		 * @return array The results
+		 */
+
+		public function arrayResults()
+		{
+			if($this->records == 1)
+			{
+				$this->arrayedResult = mysql_fetch_assoc($this->result) or die (throw new Exception("Fetching the array failed: " . mysql_error($this->db_link)));
+				return $this->arrayedResult;
+			}
+
+			$this->arrayedResult = array();
+			while ($data = mysql_fetch_assoc($this->result))
+			{
+				$this->arrayedResult[] = $data;
+			}
+			return $this->arrayedResult;
 		}
 
 
@@ -152,7 +279,7 @@
 		 * @return boolean If the function was successfully or not.
 		 */
 
-		function Write($db, $table, $column, $value, $row="")
+		function Write($table, $column, $value, $row="")
 		{
 
 		}
