@@ -1,8 +1,8 @@
 <?php
 	/**
-	 * All the functions releated to databases is here.
+	 * All functions related to databases are here.
 	 * 
-	 * This file will include stuff like, connect, write, read, remove etc.
+	 * This file will include stuff such as, connect, write, read, remove etc.
 	 * 
 	 * @category Database
 	 * @package ControlPanel
@@ -36,14 +36,14 @@
 		/**
 		 * Connects to a db.
 		 * 
-		 * @param boolean persistent If the connection should be connected persistent or not! (default false)
+		 * @param boolean persistent If the connection should be connected persistently or not! (default false)
 		 * 
-		 * @return boolean If the connection was succesfully or not.
+		 * @return boolean If the connection was successful or not.
 		 */
 
 		private function Connect($persistent  = false)
 		{
-			$this->Disconnect(); //Disconnects incase there is a running connection!
+			$this->Disconnect(); //Disconnects in case there is a running connection!
 
 			if ($persistent)
 			{
@@ -73,7 +73,7 @@
 		 * Selects the DB!
 		 * Used to complete the connection!
 		 * 
-		 * @return boolean If selecting the DB was successfully or not.
+		 * @return boolean If selecting the DB was successful or not.
 		 */
 
 		private function SelectDB()
@@ -91,11 +91,11 @@
 
 
 		/**
-		 * Disconnect a db.
+		 * Disconnect from a db.
 		 * 
-		 * @param string $db What database to disconnect.
+		 * @param string $db Which database to disconnect from.
 		 * 
-		 * @return boolean if the disconnection went successfully or not.
+		 * @return boolean if the disconnection was successful or not.
 		 */
 
 		public function Disconnect($db)
@@ -112,7 +112,7 @@
 		 * 
 		 * @param string $query The query to execute.
 		 * 
-		 * @return boolean if the execution when successfully or not.
+		 * @return boolean if the execution was successful or not.
 		 */
 
 		public function execSQL($query)
