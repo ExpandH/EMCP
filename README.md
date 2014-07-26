@@ -4,7 +4,7 @@ ExpandHosting Minecraft Control Panel
 
 ##Plans
 
-###Chat
+####Chat
 
 * Colored and formatted
 * Customized amount of rows
@@ -15,19 +15,19 @@ ExpandHosting Minecraft Control Panel
 	* Commands
 	* More
 
-###Console
+####Console
 
 * Able to send console commands
 * Fully functional interactive chat
 
-###FTP
+####FTP
 
 * Browser FTP
 	* Live browsing
 	* Teamwork
 * Support for ftp clients (Like Filezilla)
 
-###Ranks/Groups
+####Ranks/Groups
 
 * Permission based customization
 * Several already included groups
@@ -38,13 +38,13 @@ ExpandHosting Minecraft Control Panel
 * Groups and permission is server based, which lets you have different groups and permission on different servers
 * Able to turn lock a server to a specific group or specific permission (only on the browser)
 
-###General
+####General
 
 * Everything is live
 * A lot of customization even client wise you can customize
 Able to easly install plugins and disable them
 
-###Backup
+####Backup
 
 * Able to backup anything
 	* Plugins
@@ -52,31 +52,31 @@ Able to easly install plugins and disable them
 	* Specific folders and files
 * Able to set a specific time or countdown until next backup
 
-###Commands
+####Commands
 
 * Able to add custom commands
 * Able to set a specific time or countdown until a command is gonna be ran
 
-###Bot
+####Bot
 
 * Inbuilt bot
 * Able to add new commands or responses for the bot
 * Bot can respond to regular text no need for commands
 * AI Support so you are never lonely
 
-###Database
+####Database
 
 * Support for several types of databases
 	* Plain text
 	* Sqlite
 	* MySQL
 
-###Mod/Plugin Integration
+####Mod/Plugin Integration
 
 * Able to get a mod/plugins events
 * Able to interract with mod/plugins
 
-###Update
+####Update
 
 * Able to update plugins, server software, mods and much more
 * Able to add more sources if its not in the list
