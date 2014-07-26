@@ -1,7 +1,13 @@
 # Folders #
 ###########
+
 docs
 js
 output
 Servers
 
+
+# Sublime #
+###########
+
+sftp-config.json
