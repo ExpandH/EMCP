@@ -12,12 +12,16 @@
 
 	class Database
 	{
-		$hostname; //Holds the hostname.
-		$username; //Holds the username.
-		$password; //Holds the password.
-		$database; //Holds the database name.
+		$result; // Holds the query result.
+		$records; // Holds the total number of records returned.
+		$affected; // Hols the total number of records affected.
 
-		$db_link; //Holds the database link.
+		$hostname; // Holds the hostname.
+		$username; // Holds the username.
+		$password; // Holds the password.
+		$database; // Holds the database name.
+
+		$db_link; // Holds the database link.
 
 		function __construct($database, $username, $password, $hostname = "localhost", $port = "3306")
 		{
@@ -94,9 +98,45 @@
 		 * @return boolean if the disconnection went successfully or not.
 		 */
 
-		function Disconnect($db)
+		public function Disconnect($db)
 		{
+			if($this->db_link)
+			{
+				mysql_close($this->db_link);
+			}
+		}
 
+
+		/**
+		 * Executes a SQL Query
+		 * 
+		 * @param string $query The query to execute.
+		 * 
+		 * @return boolean if the execution when successfully or not.
+		 */
+
+		public function execSQL($query)
+		{
+			if ($this->result = mysql_query($query, $this->db_link))
+			{
+				if (gettype($this->result) === 'resource')
+				{
+					$this->records  = @mysql_num_rows($this->result);
+					$this->affected = @mysql_affected_rows($this->db_link);
+				}
+				else
+				{
+					$this->records  = 0;
+					$this->affected = 0;
+				}
+
+				if ()
+			}
+			else
+			{
+				throw new Exception("Query failed: " . mysql_error($this->db_link));
+				return false;
+			}
 		}
 
 
