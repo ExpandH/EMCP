@@ -280,8 +280,7 @@
 
 		private function Write($table, $vars, $datatypes, $exclude = '')
 		{
-			/
-			*
+			/*
 			if ($exclude = '')
 			{
 				$exclude = array();
