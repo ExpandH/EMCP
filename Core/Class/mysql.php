@@ -277,39 +277,42 @@
 			
 
 		/**
-		 * Write to a table.
+		 * Write a record.
 		 * 
 		 * @param string $table What table to write to.
-		 * @param string $vars What to write, the key is the column and the value is the value.
-		 * @param string $exclude Incase you want to exclude certain columns.
-		 * @param object $datatypes Converts the value to datatypes.
+		 * @param array $vars What to write, the key is the column and the value is the value.
+		 * @param string $datatypes Converts the value to datatypes.
 		 * 
 		 * @return boolean If the function was successful or not.
 		 */
 
-		private function Write($table, $vars, $exclude = '', $datatypes)
+		private function Write($table, $vars, $datatypes)
 		{
-			if ($exclude = '')
+			$keyVar = array();
+			$valueVar = array();
+			$vars = escapeData($vars, $datatypes);
+
+			$query = "INSERT INTO `{$table}` (";
+
+			foreach ($vars as $key => $value)
 			{
-				$exclude = array();
+				$keyVar[] = $key;
+				$keyValue[] = $key;
 			}
 
-			array_push($exclude, MAX_FILE_SIZE);
-
-			$vars = $this->escapeData($vars, $datatypes);
-
-			$query = "INSERT INTO `{$table}` SET ";
-
-			foreach ($var as $key => $value)
+			foreach ($keyVar as $key => $value) 
 			{
-				if(in_array($key, $exclude))
-				{
-					continue;
-				}
-				$query .= "`{$key}` = '{$value}', ";
+				$query .= "${value}, ";
 			}
 
-			$query = trim($query, ', ');
+			$query = trim($query, ', ') . " VALUES (";
+
+			foreach ($valueVar as $key => $value) 
+			{
+				$query .= '"${value}", ';
+			}
+
+			$query = trim($query, ', ') . ")";
 
 			return $this->execSQL($query);
 		}
@@ -381,7 +384,7 @@
 
 		function DeleteColumn($table, $column);
 		{
-			
+
 		}
 
 

@@ -15,22 +15,6 @@
     $memory;
     $check = false;
 
-    function __construct()
-    {
-        @$shid = shmop_open('5843', "w", 0666, 0);
-        if (!empty($shid))
-        {
-            $this->memory = $shid;
-        }
-        else
-        {
-            $shmop_id = shmop_open(5, 'c', 0644, 50);
-            $shid = shmop_open('5843', "w", 0666, 0);
-
-            $this->memory = $shid;
-        }
-    }
-
     class Start
     {
 
