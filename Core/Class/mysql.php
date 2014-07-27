@@ -264,8 +264,7 @@
 				$this->arrayedResult[] = $data;
 			}
 			return $this->arrayedResult;
-		}
-
+			
 
 		/**
 		 * Write to a table.
@@ -279,8 +278,18 @@
 		 * @return boolean If the function was successfully or not.
 		 */
 
-		private function Write($table, $column, $value, $row="")
+		private function Write($table, $vars, $datatypes, $exclude = '')
 		{
+			/
+			*
+			if ($exclude = '')
+			{
+				$exclude = array();
+			}
+
+			array_push($exclude, MAX_FILE_SIZE);
+			*/
+
 
 		}
 

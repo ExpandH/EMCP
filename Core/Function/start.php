@@ -12,9 +12,10 @@
 
     include_once("Core/Class/status.php");
 
-    private $memory;
+    $memory;
+    $check = false;
 
-    public function __construct()
+    function __construct()
     {
         @$shid = shmop_open('5843', "w", 0666, 0);
         if (!empty($shid))
@@ -32,7 +33,6 @@
 
     class Start
     {
-        $check =  false;
 
         /**
          * Starts a server.
@@ -118,9 +118,9 @@
 
         public function restart($name)
         {
-            this->stop($name);
+            $this->stop($name);
             sleep(10);
-            this->server_start($name);
+            $this->server_start($name);
         }
 
 
