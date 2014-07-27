@@ -142,19 +142,19 @@
 					break;
 
 				case 'str':
-					$data = settype($data, 'string');
+					settype($data, 'string');
 					break;
 					
 				case 'int':
-					$data = settype($data, 'integer');
+					settype($data, 'integer');
 					break;
 					
 				case 'float':
-					$data = settype($data, 'float');
+					settype($data, 'float');
 					break;
 					
 				case 'bool':
-					$data = settype($data, 'boolean');
+					settype($data, 'boolean');
 					break;
 					
 				case 'datatime':
@@ -165,7 +165,7 @@
 					break;
 					
 				case 'ts2dt':
-					$data = settype($data, 'integer');
+					settype($data, 'integer');
 					$data = date('Y-m-d H:i:s', $data);
 					break;
 					
@@ -279,7 +279,7 @@
 		 * @return boolean If the function was successfully or not.
 		 */
 
-		function Write($table, $column, $value, $row="")
+		private function Write($table, $column, $value, $row="")
 		{
 
 		}
