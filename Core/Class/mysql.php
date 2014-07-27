@@ -24,6 +24,16 @@
 
 		$db_link; // Holds the database link.
 
+		/**
+		 * Construction of the class.
+		 * 
+		 * @param string $database The database to connect to.
+		 * @param string $username The username to connect with.
+		 * @param string $password The password to connect with.
+		 * @param string $hostname The hostname to connect to.
+		 * @param string $port The port to connect to.
+		 */
+
 		function __construct($database, $username, $password, $hostname = "localhost", $port = "3306")
 		{
 			$this->database = $database;
@@ -37,7 +47,7 @@
 		/**
 		 * Connects to a db.
 		 * 
-		 * @param boolean persistent If the connection should be connected persistently or not! (default false)
+		 * @param boolean $persistent If the connection should be connected persistently or not! (default false)
 		 * 
 		 * @return boolean If the connection was successful or not.
 		 */
@@ -94,8 +104,8 @@
 		/**
 		 * Runs a mysql_real_escape_string
 		 * 
-		 * @param string data The data to escape.
-		 * @param string type The type of the data (str, int...).
+		 * @param string $data The data to escape.
+		 * @param string $type The type of the data (str, int...).
 		 * 
 		 * @return array/string The data after escaping it.
 		 */
@@ -128,8 +138,8 @@
 		/**
 		 * Sets the data to a type, to make sure that the data is the specific type.
 		 * 
-		 * @param string data The data to do stuff with.
-		 * @param string type The type to set the data to.
+		 * @param string $data The data to do stuff with.
+		 * @param string $type The type to set the data to.
 		 * 
 		 * @return string the fixed data.
 		 */
@@ -269,27 +279,39 @@
 		/**
 		 * Write to a table.
 		 * 
-		 * @param string $db What database to write to.
 		 * @param string $table What table to write to.
-		 * @param string $column What column to write to.
-		 * @param string $value What the value to write.
-		 * @param string $row Incase you want to write to specific row.
+		 * @param string $vars What to write, the key is the column and the value is the value.
+		 * @param string $exclude Incase you want to exclude certain columns.
+		 * @param object $datatypes Converts the value to datatypes.
 		 * 
-		 * @return boolean If the function was successfully or not.
+		 * @return boolean If the function was successful or not.
 		 */
 
-		private function Write($table, $vars, $datatypes, $exclude = '')
+		private function Write($table, $vars, $exclude = '', $datatypes)
 		{
-			/*
 			if ($exclude = '')
 			{
 				$exclude = array();
 			}
 
 			array_push($exclude, MAX_FILE_SIZE);
-			*/
 
+			$vars = $this->escapeData($vars, $datatypes);
 
+			$query = "INSERT INTO `{$table}` SET ";
+
+			foreach ($var as $key => $value)
+			{
+				if(in_array($key, $exclude))
+				{
+					continue;
+				}
+				$query .= "`{$key}` = '{$value}', ";
+			}
+
+			$query = trim($query, ', ');
+
+			return $this->execSQL($query);
 		}
 
 
@@ -334,6 +356,32 @@
 		function AddTable($table)
 		{
 
+		}
+
+
+		/**
+		 * Delete a record.
+		 * 
+		 * @param string $table The table that the record is in.
+		 * @param string $record The record to delete.
+		 */
+
+		function DeleteRecord($table, $record);
+		{
+
+		}
+
+
+		/**
+		 * Delete a column.
+		 * 
+		 * @param string $table The table that the column is in.
+		 * @param string $column The column to delete.
+		 */
+
+		function DeleteColumn($table, $column);
+		{
+			
 		}
 
 
