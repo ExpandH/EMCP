@@ -10,19 +10,19 @@
 	 * @copyright 2014 Dennis Planting
 	 */
 
-	class Database
+	public class MySQL
 	{
-		$result; // Holds the query result.
-		$records; // Holds the total number of records returned.
-		$affected; // Hols the total number of records affected.
-		$arrayedResult;
+		private $result; // Holds the query result.
+		private $records; // Holds the total number of records returned.
+		private $affected; // Hols the total number of records affected.
+		private $arrayedResult;
 
-		$hostname; // Holds the hostname.
-		$username; // Holds the username.
-		$password; // Holds the password.
-		$database; // Holds the database name.
+		private $hostname; // Holds the hostname.
+		private $username; // Holds the username.
+		private $password; // Holds the password.
+		private $database; // Holds the database name.
 
-		$db_link; // Holds the database link.
+		private $db_link; // Holds the database link.
 
 		/**
 		 * Construction of the class.
@@ -34,7 +34,7 @@
 		 * @param string $port The port to connect to.
 		 */
 
-		function __construct($database, $username, $password, $hostname = "localhost", $port = "3306")
+		public function __construct($database, $username, $password, $hostname = "localhost", $port = "3306")
 		{
 			$this->database = $database;
 			$this->username = $username;
@@ -328,7 +328,7 @@
 		 * @return array The results from the table.
 		 */
 
-		function Read($db, $table, $column="")
+		public function Read($db, $table, $column="")
 		{
 
 		}
@@ -342,7 +342,7 @@
 		 * @return boolean If creating a new database went successfully or not.
 		 */
 
-		function AddDB($db)
+		public function AddDB($db)
 		{
 
 		}
@@ -356,7 +356,7 @@
 		 * @return boolean If creating a new table went successfully or not.
 		 */
 		
-		function AddTable($table)
+		public function AddTable($table)
 		{
 
 		}
@@ -369,7 +369,7 @@
 		 * @param string $record The record to delete.
 		 */
 
-		function DeleteRecord($table, $record);
+		public function DeleteRecord($table, $record);
 		{
 
 		}
@@ -382,7 +382,7 @@
 		 * @param string $column The column to delete.
 		 */
 
-		function DeleteColumn($table, $column);
+		public function DeleteColumn($table, $column);
 		{
 
 		}
@@ -396,7 +396,7 @@
 		 * @return boolean If deleting the database went successfully or not.
 		 */
 		
-		function DeleteDB($db)
+		public function DeleteDB($db)
 		{
 
 		}
@@ -410,7 +410,7 @@
 		 * @return boolean If deleting the table went successfully or not.
 		 */
 		
-		function DeleteTable($table)
+		public function DeleteTable($table)
 		{
 
 		}
